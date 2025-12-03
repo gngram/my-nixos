@@ -43,20 +43,27 @@
 
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
-  services.desktopManager.cosmic.enable = true;
+  #services.displayManager.cosmic-greeter.enable = true;
+  #services.desktopManager.cosmic.enable = true;
+  
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-
 
   # Enable xfce
   #services.displayManager.defaultSession = "xfce";
   #services.xserver.desktopManager.xfce.enable = true;
-
+  
   # Enable the GNOME Desktop Environment.
-  #services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
-
+  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.banner = ''
+    Welocome to NixOS!
+  '';
+  
+  services.desktopManager.gnome.enable = true;
+  services.displayManager = {
+    autoLogin.enable = true;
+    autoLogin.user = "gangaram";
+  };
   # Enable Plasma
   #services.displayManager.sddm.enable = true;
   #services.xserver.desktopManager.plasma5.enable = true;
@@ -67,7 +74,6 @@
   #  variant = "";
   #};
 
-  
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
