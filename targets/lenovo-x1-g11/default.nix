@@ -4,7 +4,7 @@
     ./hardware-configuration.nix
   ];
   my-nixos = {
-    hostname = "leanix";
+    hostname = "linix";
     enableBluetooth = true;
     enableNvidia = false;
     enableXfce = true;

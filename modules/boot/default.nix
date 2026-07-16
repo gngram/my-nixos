@@ -22,7 +22,7 @@
 
     boot.plymouth = {
       enable = true;
-      logo = ./logo/glogo.png;
+      logo = ./logo/linix.png;
       theme = "spinner";
       extraConfig = ''
         [Daemon]

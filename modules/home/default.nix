@@ -42,17 +42,17 @@
 
       shellAliases = {
         build-lenovo = "nix build .#lenovo-x1-carbon-gen11-debug";
-        build-sys76 = "nix build .#system76-darp11-b-debug";
+        build-darp = "nix build .#system76-darp11-b-debug";
         locate = "ls -al /run/current-system/sw/bin/ | grep -in";
         ghaf-host = "ssh -t -o StrictHostKeyChecking=no ghaf@192.168.0.101 'ssh -o StrictHostKeyChecking=no ghaf@ghaf-host'";
         admin-vm = "ssh -t -o StrictHostKeyChecking=no ghaf@192.168.0.101 'ssh -o StrictHostKeyChecking=no ghaf@admin-vm'";
         gui-vm = "ssh -t -o StrictHostKeyChecking=no ghaf@192.168.0.101 'ssh -o StrictHostKeyChecking=no ghaf@gui-vm'";
-        ghaf-lenovo = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.101 .#system76-darp11-b-debug boot";
-        ghaf-sys76 = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.101 .#lenovo-x1-carbon-gen11-debug boot";
-        fa = "sudo ghaf-flash -d /dev/sda -i ./result/disk1.raw.zst";
-        fb = "sudo ghaf-flash -d /dev/sdb -i ./result/disk1.raw.zst";
-        fe = "sudo ghaf-flash -d /dev/sde -i ./result/disk1.raw.zst";
-        ff = "sudo ghaf-flash -d /dev/sdf -i ./result/disk1.raw.zst";
+        rebuild-darp = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.101 .#system76-darp11-b-debug boot";
+        rebuild-lenovo = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.101 .#lenovo-x1-carbon-gen11-debug boot";
+        fa = "sudo ghaf-flash -d /dev/sda -i ./result/ghaf-image.raw.zst";
+        fb = "sudo ghaf-flash -d /dev/sdb -i ./result/ghaf-image.raw.zst";
+        fe = "sudo ghaf-flash -d /dev/sde -i ./result/ghaf-image.raw.zst";
+        ff = "sudo ghaf-flash -d /dev/sdf -i ./result/ghaf-image.raw.zst";
         cdr = "cd /workspace/repositories/gngram";
         c = "clear";
         ghaf = "cd /work/repositories/gngram/ghaf";

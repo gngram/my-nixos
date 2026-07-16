@@ -12,7 +12,7 @@ in
     isBuilder = mkEnableOption "Optimizations and tools for build server";
     hostname = mkOption {
       type = types.str;
-      default = "leanix";
+      default = "linix";
     };
     enableGnome = mkEnableOption "Enable Gnome Desktop";
     enableKde = mkEnableOption "Enable KDE Desktop";
@@ -47,9 +47,9 @@ in
     # Docker
     virtualisation.docker.enable = true;
     virtualisation.docker.package = pkgs.docker_29;
-    
 
-    
+
+
     # Tailscale
     services.tailscale.enable = true;
 
@@ -72,7 +72,7 @@ in
       (mkIf cfg.enableGnome {
         gdm.enable = true;
         gdm.banner = ''
-          Welcome to Leanix!
+          Welcome to Linix!
         '';
       })
       (mkIf cfg.enableKde {
