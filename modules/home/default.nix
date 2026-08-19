@@ -47,7 +47,7 @@
         ghaf-host = "ssh -t -o StrictHostKeyChecking=no ghaf@192.168.0.101 'ssh -o StrictHostKeyChecking=no ghaf@ghaf-host'";
         admin-vm = "ssh -t -o StrictHostKeyChecking=no ghaf@192.168.0.101 'ssh -o StrictHostKeyChecking=no ghaf@admin-vm'";
         gui-vm = "ssh -t -o StrictHostKeyChecking=no ghaf@192.168.0.101 'ssh -o StrictHostKeyChecking=no ghaf@gui-vm'";
-        rebuild-darp = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.101 .#system76-darp11-b-debug boot";
+        rebuild-darp = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.102 .#system76-darp11-b-debug boot";
         rebuild-lenovo = "rm -rf ~/.ssh/known_hosts; ghaf-rebuild 192.168.0.101 .#lenovo-x1-carbon-gen11-debug boot";
         fa = "sudo ghaf-flash -d /dev/sda -i ./result/ghaf-image.raw.zst";
         fb = "sudo ghaf-flash -d /dev/sdb -i ./result/ghaf-image.raw.zst";
@@ -55,64 +55,66 @@
         ff = "sudo ghaf-flash -d /dev/sdf -i ./result/ghaf-image.raw.zst";
         cdr = "cd /workspace/repositories/gngram";
         c = "clear";
-        ghaf = "cd /work/repositories/gngram/ghaf";
-        givc = "cd /work/repositories/gngram/ghaf-givc";
-        poc = "cd /work/repositories/gngram/poc-store";
+        wghaf = "cd /work/repositories/gngram/ghaf";
+        wgivc = "cd /work/repositories/gngram/ghaf-givc";
+        ghaf = "cd /home/gangaram/playground/ghaf";
+        givc = "cd /home/gangaram/playground/givc";
+        wpoc = "cd /work/repositories/gngram/poc-store";
         edit = "vim $(fzf)";
         npedit = "notepad $(fzf)";
       };
 
       bashrcExtra = ''
-        	    # Force load the Nix profile if it exists
-        		if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-        			. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-        		fi
-  
-                parse_git_branch() {
-                  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-                }
+   	    # Force load the Nix profile if it exists
+		if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+			. "$HOME/.nix-profile/etc/profile.d/nix.sh"
+		fi
 
-                CYAN="\[\e[02;36m\]"
-                WHITE="\[\e[02;37m\]"
-                BLUE="\[\e[02;34m\]"
-                GREEN="\[\e[02;42m\]"
-                YELLOW="\[\e[33;93m\]"
-                RED="\[\e[02;31m\]"
-                TEXT_RESET="\[\e[00m\]"
-                CURRENT_PATH="\w"
+		parse_git_branch() {
+		  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+		}
 
-                export PS1="''${YELLOW}[\\w]''${TEXT_RESET} ''${CYAN}\$(parse_git_branch)''${CYAN}:''${TEXT_RESET} "
+		CYAN="\[\e[02;36m\]"
+		WHITE="\[\e[02;37m\]"
+		BLUE="\[\e[02;34m\]"
+		GREEN="\[\e[02;42m\]"
+		YELLOW="\[\e[33;93m\]"
+		RED="\[\e[02;31m\]"
+		TEXT_RESET="\[\e[00m\]"
+		CURRENT_PATH="\w"
 
-                bind 'set enable-bracketed-paste on'
+		export PS1="''${YELLOW}[\\w]''${TEXT_RESET} ''${CYAN}\$(parse_git_branch)''${CYAN}:''${TEXT_RESET} "
 
-                # fnm (Node version manager)
-                FNM_PATH="$HOME/.local/share/fnm"
-                if [ -d "$FNM_PATH" ]; then
-                  export PATH="$FNM_PATH:$PATH"
-                  eval "$(fnm env)"
-                fi
+		bind 'set enable-bracketed-paste on'
 
-                #Notepad aliasing
-                notepad() {
-                  NotepadNext "$@" > /dev/null 2>&1 &
-                }
-                export FZF_DEFAULT_COMMAND='fd --type f'
+		# fnm (Node version manager)
+		FNM_PATH="$HOME/.local/share/fnm"
+		if [ -d "$FNM_PATH" ]; then
+		  export PATH="$FNM_PATH:$PATH"
+		  eval "$(fnm env)"
+		fi
 
-                export EDITOR="${pkgs.vim}/bin/vim"
-                export VISUAL="${pkgs.notepad-next}/bin/NotepadNext"
-                export QT_QPA_PLATFORM=wayland
+		#Notepad aliasing
+		notepad() {
+		  NotepadNext "$@" > /dev/null 2>&1 &
+		}
+		export FZF_DEFAULT_COMMAND='fd --type f'
 
-                # fzf (completion & keybindings) — refer from nixpkgs
-                if [ -f "${pkgs.fzf}/share/fzf/completion.bash" ]; then
-                  source "${pkgs.fzf}/share/fzf/completion.bash"
-                fi
+		export EDITOR="${pkgs.vim}/bin/vim"
+		export VISUAL="${pkgs.notepad-next}/bin/NotepadNext"
+		export QT_QPA_PLATFORM=xcb
 
-                if [ -f "${pkgs.fzf}/share/fzf/key-bindings.bash" ]; then
-                  source "${pkgs.fzf}/share/fzf/key-bindings.bash"
-                fi
-                if [ -f "$HOME/.user_bashrc" ]; then
-                  source "$HOME/.user_bashrc"
-                fi
+		# fzf (completion & keybindings) — refer from nixpkgs
+		if [ -f "${pkgs.fzf}/share/fzf/completion.bash" ]; then
+		  source "${pkgs.fzf}/share/fzf/completion.bash"
+		fi
+
+		if [ -f "${pkgs.fzf}/share/fzf/key-bindings.bash" ]; then
+		  source "${pkgs.fzf}/share/fzf/key-bindings.bash"
+		fi
+		if [ -f "$HOME/.user_bashrc" ]; then
+		  source "$HOME/.user_bashrc"
+		fi
       '';
     };
   };
