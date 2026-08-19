@@ -4,7 +4,7 @@
   home-manager.useUserPackages = true;
 
   home-manager.users.gangaram = {
-    home.stateVersion = "25.11"; # match your nixpkgs version
+    home.stateVersion = config.system.stateVersion;
 
     home.packages = with pkgs; [
       gtkterm

@@ -8,7 +8,7 @@
       "quiet"
       "splash"
       "udev.log_level=3"
-      "video=HDMI-A-2:off"
+      #"video=HDMI-A-2:off"
       "video=DP-1:off"
       "video=DP-2:off"
     ];

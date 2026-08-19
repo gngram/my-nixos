@@ -141,7 +141,7 @@ in
     services.openssh.enable = true;
     networking.firewall.allowedTCPPorts = [ 22 445 139 8080 41641 ];
     networking.firewall.allowedUDPPorts = [ 137 138 8080 41641 ];
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
 
     # Bluetooth (File 1 specific)
     hardware.bluetooth.enable = mkIf cfg.enableBluetooth true;
