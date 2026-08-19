@@ -15,7 +15,16 @@
       pinta
       nomacs
       wl-clipboard
+      cargo
+      rustc
+      rust-analyzer
+      rustfmt
+      # Ensure rust-src is present for rust-analyzer code navigation
+      rustPlatform.rustLibSrc 
     ];
+    home.sessionVariables = {
+      RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+    };
     home.file = {
       ".gitconfig".source = ./dotfiles/gitconfig;
       ".vimrc".source = ./dotfiles/vimrc;
@@ -65,56 +74,56 @@
       };
 
       bashrcExtra = ''
-   	    # Force load the Nix profile if it exists
-		if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
-			. "$HOME/.nix-profile/etc/profile.d/nix.sh"
-		fi
+        # Force load the Nix profile if it exists
+        if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+          . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+        fi
 
-		parse_git_branch() {
-		  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-		}
+        parse_git_branch() {
+          git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+        }
 
-		CYAN="\[\e[02;36m\]"
-		WHITE="\[\e[02;37m\]"
-		BLUE="\[\e[02;34m\]"
-		GREEN="\[\e[02;42m\]"
-		YELLOW="\[\e[33;93m\]"
-		RED="\[\e[02;31m\]"
-		TEXT_RESET="\[\e[00m\]"
-		CURRENT_PATH="\w"
+        CYAN="\[\e[02;36m\]"
+        WHITE="\[\e[02;37m\]"
+        BLUE="\[\e[02;34m\]"
+        GREEN="\[\e[02;42m\]"
+        YELLOW="\[\e[33;93m\]"
+        RED="\[\e[02;31m\]"
+        TEXT_RESET="\[\e[00m\]"
+        CURRENT_PATH="\w"
 
-		export PS1="''${YELLOW}[\\w]''${TEXT_RESET} ''${CYAN}\$(parse_git_branch)''${CYAN}:''${TEXT_RESET} "
+        export PS1="''${YELLOW}[\\w]''${TEXT_RESET} ''${CYAN}\$(parse_git_branch)''${CYAN}:''${TEXT_RESET} "
 
-		bind 'set enable-bracketed-paste on'
+        bind 'set enable-bracketed-paste on'
 
-		# fnm (Node version manager)
-		FNM_PATH="$HOME/.local/share/fnm"
-		if [ -d "$FNM_PATH" ]; then
-		  export PATH="$FNM_PATH:$PATH"
-		  eval "$(fnm env)"
-		fi
+        # fnm (Node version manager)
+        FNM_PATH="$HOME/.local/share/fnm"
+        if [ -d "$FNM_PATH" ]; then
+          export PATH="$FNM_PATH:$PATH"
+          eval "$(fnm env)"
+        fi
 
-		#Notepad aliasing
-		notepad() {
-		  NotepadNext "$@" > /dev/null 2>&1 &
-		}
-		export FZF_DEFAULT_COMMAND='fd --type f'
+        #Notepad aliasing
+        notepad() {
+          NotepadNext "$@" > /dev/null 2>&1 &
+        }
+        export FZF_DEFAULT_COMMAND='fd --type f'
 
-		export EDITOR="${pkgs.vim}/bin/vim"
-		export VISUAL="${pkgs.notepad-next}/bin/NotepadNext"
-		export QT_QPA_PLATFORM=xcb
+        export EDITOR="${pkgs.vim}/bin/vim"
+        export VISUAL="${pkgs.notepad-next}/bin/NotepadNext"
+        export QT_QPA_PLATFORM=xcb
 
-		# fzf (completion & keybindings) — refer from nixpkgs
-		if [ -f "${pkgs.fzf}/share/fzf/completion.bash" ]; then
-		  source "${pkgs.fzf}/share/fzf/completion.bash"
-		fi
+        # fzf (completion & keybindings) — refer from nixpkgs
+        if [ -f "${pkgs.fzf}/share/fzf/completion.bash" ]; then
+          source "${pkgs.fzf}/share/fzf/completion.bash"
+        fi
 
-		if [ -f "${pkgs.fzf}/share/fzf/key-bindings.bash" ]; then
-		  source "${pkgs.fzf}/share/fzf/key-bindings.bash"
-		fi
-		if [ -f "$HOME/.user_bashrc" ]; then
-		  source "$HOME/.user_bashrc"
-		fi
+        if [ -f "${pkgs.fzf}/share/fzf/key-bindings.bash" ]; then
+          source "${pkgs.fzf}/share/fzf/key-bindings.bash"
+        fi
+        if [ -f "$HOME/.user_bashrc" ]; then
+          source "$HOME/.user_bashrc"
+        fi
       '';
     };
   };
