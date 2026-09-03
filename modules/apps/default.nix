@@ -1,11 +1,16 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  # List packages installed in system profile. To search, run:
+  imports = [
+    ./chrome-webapps.nix
+  ];
+
+  mynixos.google-chrome.enableWebApps = true;
+
   environment.systemPackages = with pkgs; [
     meld
     firefox
-    vim
+    vim 
     gitFull
     nettools
     wget
@@ -16,11 +21,10 @@
     gsettings-desktop-schemas
     teams-for-linux
     tree
-    wget
+    my-slack
     docker_29
     sysstat
     statix
-  ];
-
-
+  ];  
 }
+

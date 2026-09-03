@@ -126,16 +126,6 @@ in
       ];
     };
 
-    environment.systemPackages = with pkgs; [
-      vim
-      gitFull
-      nettools
-      firefox
-      teams-for-linux
-      ghostty
-      my-slack
-      my-google-chrome
-    ];
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     services.openssh.enable = true;
